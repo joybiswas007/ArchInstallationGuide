@@ -27,6 +27,7 @@ Grab Arch Linux ISO file from their [Download](https://archlinux.org/download/) 
 It is recommended to verify the image signature before use, especially when downloading from an HTTP mirror, where downloads are generally prone to be intercepted to serve malicious images
 
 ```$ gpg --keyserver-options auto-key-retrieve --verify archlinux-version-x86_64.iso.sig```
+
 Alternatively, from an existing Arch Linux installation run:
 
 ```$ pacman-key -v archlinux-version-x86_64.iso.sig```
@@ -250,7 +251,9 @@ and it'll look like this `wheel ALL=(ALL) ALL`
 
 - & now you're good to go.Now let's install Graphical Interface.
 let's install a display driver.we will use xorg in this tutorial.
-**Xorg**
+
+- **Xorg**
+
 Xorg (commonly referred to as simply X) is the most popular display server among Linux users. Its ubiquity has led to making it an ever-present requisite for GUI applications, resulting in massive adoption from most distributions. See the Xorg Wikipedia article or visit the Xorg website for more details.
 
 ```$ pacman -S xorg```
