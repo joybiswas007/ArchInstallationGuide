@@ -53,7 +53,8 @@ Use `cfdisk` to Patrition Disk.We'll be using `cfdisk` in this guide.It's Super 
 
 #Format the partitions
 as you are done with the making partitions now let's format them for making them usable.
-```mkfs.ext4 /dev/root_partition
+
+```mkfs.ext4 /dev/root_partition```
 
 ```mkfs.fat -F32 /dev/efi_system_partition```
 If you created an [EFI system partition](https://wiki.archlinux.org/title/EFI_system_partition#Format_the_partition), format it to FAT32 using [mkfs.fat(8)](https://man.archlinux.org/man/mkfs.fat.8).
@@ -68,9 +69,11 @@ If you created an [EFI system partition](https://wiki.archlinux.org/title/EFI_sy
 If you created a [swap](https://wiki.archlinux.org/title/Swap) volume, enable it with [swapon(8)](https://man.archlinux.org/man/swapon.8):
 
 ```swapon /dev/swap_partition```
+
 Now let's create some directory
 
 ```mkdir -p /mnt/boot/efi```
+
 ```mkdir /mnt/home```
 
 #Select the mirrors
@@ -102,6 +105,7 @@ To install other packages or package groups, append the names to the pacstrap co
 Generate an [fstab](https://wiki.archlinux.org/title/Fstab) file (use -U or -L to define by [UUID](https://wiki.archlinux.org/title/UUID) or labels, respectively):
 
 ```genfstab -U /mnt >> /mnt/etc/fstab```
+
 Check the resulting `/mnt/etc/fstab file`, and [edit](https://wiki.archlinux.org/title/Textedit) it in case of errors.
 
 #Chroot
@@ -125,7 +129,7 @@ change the Region & City according to your location.
 
 or check all the available regions
 
-```/usr/share/zoneinfo```
+```cd /usr/share/zoneinfo && ls```
 
 & select the one you need.
 
@@ -141,6 +145,7 @@ Edit `/etc/locale.gen` and uncomment `en_US.UTF-8 UTF-8` and other needed locale
 - Create the locale.conf(5) file, and [set the LANG variable](https://wiki.archlinux.org/title/Locale#Setting_the_system_locale) accordingly:
 
 ```nano /etc/locale.conf``` //Enter the followings in locale.conf file//
+
 `LANG=en_US.UTF-8`
 
 - If you [set the console keyboard layout](https://wiki.archlinux.org/title/installation_guide#Set_the_console_keyboard_layout), make the changes persistent in [vconsole.conf(5)](https://man.archlinux.org/man/vconsole.conf.5):
@@ -153,16 +158,20 @@ Edit `/etc/locale.gen` and uncomment `en_US.UTF-8 UTF-8` and other needed locale
 
 ```nano /etc/hostname```
 `myhostname`
+
 Alternatively, using [hostnamectl(1)](https://man.archlinux.org/man/hostnamectl.1):
 
 ```hostnamectl set-hostname myhostname```
+
 - Some software may however still read /etc/hosts directly, see [4] [5] for examples. To prevent them from potentially breaking, hanging or otherwise delaying operation, make sure they can resolve the local hostname and localhost by configuring the hosts(5) file:
 
 ```nano /etc/hosts```
 
+```
 127.0.0.1	localhost
 ::1		localhost
 127.0.1.1	myhostname
+```
 
 Complete the [network configuration](https://wiki.archlinux.org/title/Network_configuration) for the newly installed environment. That may include installing suitable [network management](https://wiki.archlinux.org/title/Network_management) software.
 
@@ -175,22 +184,27 @@ For [LVM](https://wiki.archlinux.org/title/Install_Arch_Linux_on_LVM#Adding_mkin
 
 #Root password
 Set the root password:
+
 ```passwd```
 
 Now let's install Grub in EFI directory.
 
 ```grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=GRUB```
+
 - generate  grub file
 
 ```grub-mkconfig -o /boot/grub/grub.cfg```
 
 - Enable the NetworkManager
+
 ```systemctl enable NetworkManager```
 
 - Exit the chroot environment by typing `exit` or pressing `Ctrl+d`
+
 ```exit```
 
 #Unmount
+
 ```/umount/dev/efi_system_partition```
 
 ```/umount /mnt```
@@ -210,21 +224,27 @@ password: `thatUsetduringinstalltion'
 A new installation leaves you with only the superuser account, better known as "root". Logging in as root for prolonged periods of time, possibly even exposing it via SSH on a server, is insecure. Instead, you should create and use unprivileged user account(s) for most tasks, only using the root account for system administration.
 
 ```useradd --create-home myuser```
+
 & set password for your user
+
 ```password myuser```
+
 let's give your user some power
 
 ```usermod -aG wheel,users,power,storage myuser```
 
 `-a = append the user to the supplemental GROUPS mentioned by the -G option without removing the user from other groups.`
 `-G, --groups GROUPS = new list of supplementary GROUPS`
+
 run `usermod --help` for more details.
 
 - Now give your user permission when your user run `sudo` commands it'll ask for `password`.
 
 ```nano /etc/sudoers```
 ## Uncomment to allow members of group wheel to execute any command
+
 `#wheel ALL=(ALL) ALL` & uncomment this line by just removing `#`
+
 and it'll look like this `wheel ALL=(ALL) ALL`
 
 - & now you're good to go.Now let's install Graphical Interface.
