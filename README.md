@@ -260,17 +260,23 @@ and also let's install some fonts
 ```$ pacman -S ttf-dejavu ttf-droid ttf-hack ttf-font-awesome otf-font-awesome  ttf-lato ttf-liberation ttf-libertine ttf-opensans ttf-robot ttf-ubuntu-font-family```
 
 ```$nano /etc/profile.d/freetype2.sh```
-=> Uncomment this line
-`#export FREETYPE_PROPERTIES="truetype:interpreter-version=40"`
+- Uncomment this line
+
+`#export FREETYPE_PROPERTIES="truetype:interpreter-version=40`
 
 & make it looks like this
 
-`export FREETYPE_PROPERTIES="truetype:interpreter-version=40"`
+`export FREETYPE_PROPERTIES="truetype:interpreter-version=40`
+
 & the final stage let's install a Display Manager & Desktop Environment.
 
-i'll be using **KDE** in this one cause `I Love KDE` <3.However you can use any display manager & desktop environment.
+i'll be using **KDE** in this one cause `I Love KDE` :) .However you can use any display manager & desktop environment.
 
-```$ pacman -S sddm kde-plasma-desktop```
+```$ pacman -S sddm kde-plasma-desktop``` 
+
+if you want to install all `KDE` applications then run:
+
+```$ pacman -s kde-application```
 
 - & let's enable our display manager
 
