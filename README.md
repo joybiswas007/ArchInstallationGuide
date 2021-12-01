@@ -29,7 +29,7 @@ This is a direct guide to install **Arch Linux**.I used these steps to install *
 ### Pre-installation
 Grab Arch Linux ISO file from their [Download](https://archlinux.org/download/) page & boot your usb drive with any bootable software you like.I've used [Balena Etcher](https://www.balena.io/etcher/) in this tutorial.
 
-###Verify signature
+### Verify signature
 It is recommended to verify the image signature before use, especially when downloading from an HTTP mirror, where downloads are generally prone to be intercepted to serve malicious images
 
 ```$ gpg --keyserver-options auto-key-retrieve --verify archlinux-version-x86_64.iso.sig```
@@ -55,7 +55,7 @@ Use [timedatectl(1)](https://man.archlinux.org/man/timedatectl.1) to ensure the 
 ```$ timedatectl set-ntp true```
 To check the service status, use `timedatectl status`
 
-#Partition the disks
+### Partition the disks
 Use `cfdisk` to Patrition Disk.We'll be using `cfdisk` in this guide.It's Super easy to Partition the disks with `cfdisk`.Seariously! try it once.
 
 ### Format the partitions
@@ -92,7 +92,7 @@ The higher a mirror is placed in the list, the more priority it is given when do
 
 This file will later be copied to the new system by pacstrap, so it is worth getting right.
 
-###Install essential packages
+### Install essential packages
 Use the [pacstrap(8)](https://man.archlinux.org/man/pacstrap.8) script to install the [base](https://archlinux.org/packages/?name=base) package, Linux [kernel](https://wiki.archlinux.org/title/Kernel) and firmware for common hardware:
 
 ```$ pacstrap /mnt base linux linux-firmware vim nano linux-headers base-devel```
@@ -110,7 +110,7 @@ a text editor,
 packages for accessing documentation in man and info pages: `man-db`, `man-pages` and `texinfo`.
 To install other packages or package groups, append the names to the pacstrap command above (space separated) or use pacman while chrooted into the new system. For comparison, packages available in the live system can be found in packages.x86_64.
 
-###Configure the system
+### Configure the system
 Generate an [fstab](https://wiki.archlinux.org/title/Fstab) file (use -U or -L to define by [UUID](https://wiki.archlinux.org/title/UUID) or labels, respectively):
 
 ```$ genfstab -U /mnt >> /mnt/etc/fstab```
@@ -163,6 +163,7 @@ Edit `/etc/locale.gen` and uncomment `en_US.UTF-8 UTF-8` and other needed locale
 ```nano /etc/vconsole.conf```
 
 ### Network configuration
+
 - Create the hostname file:
 
 ```$ nano /etc/hostname```
@@ -183,7 +184,7 @@ Alternatively, using [hostnamectl(1)](https://man.archlinux.org/man/hostnamectl.
 
 Complete the [network configuration](https://wiki.archlinux.org/title/Network_configuration) for the newly installed environment. That may include installing suitable [network management](https://wiki.archlinux.org/title/Network_management) software.
 
-###Initramfs
+### Initramfs
 Creating a new initramfs is usually not required, because [mkinitcpio](https://wiki.archlinux.org/title/Mkinitcpio) was run on installation of the kernel package with pacstrap.
 
 For [LVM](https://wiki.archlinux.org/title/Install_Arch_Linux_on_LVM#Adding_mkinitcpio_hooks), [system encryption](https://wiki.archlinux.org/title/Dm-crypt) or [RAID](https://wiki.archlinux.org/title/RAID#Configure_mkinitcpio), modify [mkinitcpio.conf(5)](https://man.archlinux.org/man/mkinitcpio.conf.5) and recreate the initramfs image:
