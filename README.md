@@ -125,7 +125,7 @@ Check the resulting `/mnt/etc/fstab file`, and [edit](https://wiki.archlinux.org
 
 ```$ pacman -S grub efibootmgr efivar networkmanager intel-ucode amd-ucode```
 
-if you device is support Intel microcode then install `intel-ucode` or if you device support AMD micorcode then install `amd-ucode`.
+if you device is support Intel Microcode then install `intel-ucode` or if your device support AMD Microcode then install `amd-ucode`.
 
 ### Time zone
 Set the [time zone](https://wiki.archlinux.org/title/System_time#Time_zone):
