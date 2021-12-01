@@ -196,13 +196,13 @@ Set the root password:
 
 ```$ passwd```
 
-Now let's install Grub in EFI directory.
+- Now let's install Grub in EFI directory.
 
-```grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=GRUB```
+```$ grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=GRUB```
 
-- generate  grub file
+- Generate  Grub file
 
-```grub-mkconfig -o /boot/grub/grub.cfg```
+```$ grub-mkconfig -o /boot/grub/grub.cfg```
 
 - Enable the NetworkManager
 
