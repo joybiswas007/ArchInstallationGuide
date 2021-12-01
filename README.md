@@ -166,7 +166,7 @@ Edit `/etc/locale.gen` and uncomment `en_US.UTF-8 UTF-8` and other needed locale
 
 - Create the hostname file:
 
-```$ nano /etc/hostname```
+`$ nano /etc/hostname`
 ```myhostname```
 
 Alternatively, using [hostnamectl(1)](https://man.archlinux.org/man/hostnamectl.1):
