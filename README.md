@@ -26,7 +26,7 @@ This is a direct guide to install **Arch Linux**.I used these steps to install *
 | 16  | [**Root password**](#Root-password)                           |
 | 17  | [**Post-installation**](#Post-installation)                   |
 
-###Pre-installation
+### Pre-installation
 Grab Arch Linux ISO file from their [Download](https://archlinux.org/download/) page & boot your usb drive with any bootable software you like.I've used [Balena Etcher](https://www.balena.io/etcher/) in this tutorial.
 
 ###Verify signature
@@ -38,7 +38,7 @@ Alternatively, from an existing Arch Linux installation run:
 
 ```$ pacman-key -v archlinux-version-x86_64.iso.sig```
 
-###Connect to the internet
+### Connect to the internet
 Ensure your [network interface](https://wiki.archlinux.org/title/Network_interface) is listed and enabled, for example with [ip-link(8)](https://man.archlinux.org/man/ip-link.8)
 
 ```$ ip link```
@@ -49,7 +49,7 @@ verify the connection with [ping](https://en.wikipedia.org/wiki/ping_(networking
 
 or Make sure your PC is connected to the Internet with Ethernet Cable.
 
-###Update the system clock
+### Update the system clock
 Use [timedatectl(1)](https://man.archlinux.org/man/timedatectl.1) to ensure the system clock is accurate:
 
 ```$ timedatectl set-ntp true```
@@ -58,7 +58,7 @@ To check the service status, use `timedatectl status`
 #Partition the disks
 Use `cfdisk` to Patrition Disk.We'll be using `cfdisk` in this guide.It's Super easy to Partition the disks with `cfdisk`.Seariously! try it once.
 
-###Format the partitions
+### Format the partitions
 as you are done with the making partitions now let's format them for making them usable.
 
 ```$ mkfs.ext4 /dev/root_partition```
@@ -69,7 +69,7 @@ If you created an [EFI system partition](https://wiki.archlinux.org/title/EFI_sy
 
 ```$ mkswap /dev/swap_partition```
 
-###Mount the file systems
+### Mount the file systems
 
 ```$ mount /dev/root_partition /mnt```
 
@@ -85,7 +85,7 @@ Now let's create some directory
 
 ```$ mkdir /mnt/home```
 
-###Select the mirrors
+### Select the mirrors
 Packages to be installed must be downloaded from [mirror](https://wiki.archlinux.org/title/Mirrors) servers, which are defined in `/etc/pacman.d/mirrorlist`. On the live system, after connecting to the internet, reflector updates the mirror list by choosing 20 most recently synchronized HTTPS mirrors and sorting them by download rate.
 
 The higher a mirror is placed in the list, the more priority it is given when downloading a package. You may want to inspect the file to see if it is satisfactory. If it is not, edit the file accordingly, and move the geographically closest mirrors to the top of the list, although other criteria should be taken into account.
@@ -117,7 +117,7 @@ Generate an [fstab](https://wiki.archlinux.org/title/Fstab) file (use -U or -L t
 
 Check the resulting `/mnt/etc/fstab file`, and [edit](https://wiki.archlinux.org/title/Textedit) it in case of errors.
 
-###Chroot
+### Chroot
 [Change root](https://wiki.archlinux.org/title/Change_root) into the new system:
 
 ```$ arch-chroot /mnt```
@@ -127,7 +127,7 @@ Check the resulting `/mnt/etc/fstab file`, and [edit](https://wiki.archlinux.org
 
 if you device is support Intel microcode then install `intel-ucode` or if you device support AMD micorcode then install `amd-ucode`.
 
-###Time zone
+### Time zone
 Set the [time zone](https://wiki.archlinux.org/title/System_time#Time_zone):
 
 ```$ ln -sf /usr/share/zoneinfo/Region/City /etc/localtime```
@@ -146,7 +146,7 @@ Run [hwclock(8)](https://man.archlinux.org/man/hwclock.8) to generate `/etc/adjt
 
 ```$ hwclock --systohc```
 
-###Localization
+### Localization
 Edit `/etc/locale.gen` and uncomment `en_US.UTF-8 UTF-8` and other needed locales. Generate the locales by running:
 
 ```$ locale-gen```
@@ -162,7 +162,7 @@ Edit `/etc/locale.gen` and uncomment `en_US.UTF-8 UTF-8` and other needed locale
 
 ```nano /etc/vconsole.conf```
 
-###Network configuration
+### Network configuration
 - Create the hostname file:
 
 ```$ nano /etc/hostname```
@@ -190,7 +190,7 @@ For [LVM](https://wiki.archlinux.org/title/Install_Arch_Linux_on_LVM#Adding_mkin
 
 ```$ mkinitcpio -P```
 
-###Root password
+### Root password
 Set the root password:
 
 ```$ passwd```
@@ -211,7 +211,7 @@ Now let's install Grub in EFI directory.
 
 ```$ exit```
 
-###Unmount
+### Unmount
 
 ```$ /umount/dev/efi_system_partition```
 
@@ -219,7 +219,7 @@ Now let's install Grub in EFI directory.
 
 - Optionally manually unmount all the partitions with `umount -R /mnt`: this allows noticing any "busy" partitions, and finding the cause with [fuser(1)](https://man.archlinux.org/man/fuser.1)
 
-##Reboot
+### Reboot
 
 ```$ reboot```
 
@@ -228,7 +228,7 @@ Now let's install Grub in EFI directory.
 username: `root`
 password: `thatUsetduringinstalltion'
 
-###Post-installation
+### Post-installation
 A new installation leaves you with only the superuser account, better known as "root". Logging in as root for prolonged periods of time, possibly even exposing it via SSH on a server, is insecure. Instead, you should create and use unprivileged user account(s) for most tasks, only using the root account for system administration.
 
 ```$ useradd --create-home myuser```
@@ -249,7 +249,8 @@ run `usermod --help` for more details.
 - Now give your user permission when your user run `sudo` commands it'll ask for `password`.
 
 ```$ nano /etc/sudoers```
-## Uncomment to allow members of group wheel to execute any command
+
+**Uncomment to allow members of group wheel to execute any command.**
 
 `#wheel ALL=(ALL) ALL` & uncomment this line by just removing `#`
 
@@ -269,6 +270,7 @@ and also let's install some fonts
 ```$ pacman -S ttf-dejavu ttf-droid ttf-hack ttf-font-awesome otf-font-awesome  ttf-lato ttf-liberation ttf-libertine ttf-opensans ttf-robot ttf-ubuntu-font-family```
 
 ```$nano /etc/profile.d/freetype2.sh```
+
 - Uncomment this line
 
 `#export FREETYPE_PROPERTIES="truetype:interpreter-version=40`
