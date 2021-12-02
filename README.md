@@ -215,7 +215,7 @@ Set the root password:
 
 ### Unmount
 
-```$ /umount/dev/efi_system_partition```
+```$ /umount /dev/efi_system_partition```
 
 ```$ /umount /mnt```
 
