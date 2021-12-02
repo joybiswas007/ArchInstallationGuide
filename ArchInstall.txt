@@ -214,7 +214,7 @@ Now let's install Grub in EFI directory.
 
 ### Unmount
 
-```$ /umount/dev/efi_system_partition```
+```$ /umount /dev/efi_system_partition```
 
 ```$ /umount /mnt```
 
