@@ -175,11 +175,13 @@ Alternatively, using [hostnamectl(1)](https://man.archlinux.org/man/hostnamectl.
 
 - Some software may however still read /etc/hosts directly, see [4] [5] for examples. To prevent them from potentially breaking, hanging or otherwise delaying operation, make sure they can resolve the local hostname and localhost by configuring the hosts(5) file:
 
-```$ nano /etc/hosts```
+`$ nano /etc/hosts`
 
-```127.0.0.1	localhost
+```
+127.0.0.1	localhost
 ::1		localhost
-127.0.1.1	myhostname```
+127.0.1.1	myhostname
+```
 
 Complete the [network configuration](https://wiki.archlinux.org/title/Network_configuration) for the newly installed environment. That may include installing suitable [network management](https://wiki.archlinux.org/title/Network_management) software.
 
