@@ -69,15 +69,17 @@ If you created an [EFI system partition](https://wiki.archlinux.org/title/EFI_sy
 
 ```$ mkswap /dev/swap_partition```
 
-Now let's create some directory
+### Mount the file systems
+
+```$ mount /dev/root_partition /mnt```
+
+Now let's create some directory inside the /mnt partition to mount the efi system.
 
 ```$ mkdir -p /mnt/boot/efi```
 
 ```$ mkdir /mnt/home```
 
-### Mount the file systems
-
-```$ mount /dev/root_partition /mnt```
+and now mount the efi system
 
 ```$ mount /dev/sda1 /mnt/boot/efi```
 
@@ -147,15 +149,16 @@ Run [hwclock(8)](https://man.archlinux.org/man/hwclock.8) to generate `/etc/adjt
 ```$ hwclock --systohc```
 
 ### Localization
-Edit `/etc/locale.gen` and uncomment `en_US.UTF-8 UTF-8` and other needed locales. Generate the locales by running:
-
-```$ locale-gen```
 
 - Create the locale.conf(5) file, and [set the LANG variable](https://wiki.archlinux.org/title/Locale#Setting_the_system_locale) accordingly:
 
 ```$ nano /etc/locale.conf``` //Enter the followings in locale.conf file//
 
 ```LANG=en_US.UTF-8```
+
+Edit `/etc/locale.gen` and uncomment `en_US.UTF-8 UTF-8` and other needed locales. Generate the locales by running:
+
+```$ locale-gen```
 
 - If you [set the console keyboard layout](https://wiki.archlinux.org/title/installation_guide#Set_the_console_keyboard_layout), make the changes persistent in [vconsole.conf(5)](https://man.archlinux.org/man/vconsole.conf.5):
 - NOT Necessary Nonetheless try this
@@ -228,7 +231,7 @@ Now let's install Grub in EFI directory.
 - and if your pc shows you login screen then you've successfull installed **Arch Linux** Cheers!
 
 username: `root`
-password: `thatUsetduringinstalltion'
+password: `thatUsedDuringInstalltion'
 
 ### Post-installation
 A new installation leaves you with only the superuser account, better known as "root". Logging in as root for prolonged periods of time, possibly even exposing it via SSH on a server, is insecure. Instead, you should create and use unprivileged user account(s) for most tasks, only using the root account for system administration.
@@ -283,7 +286,7 @@ and also let's install some fonts
 
 & the final stage let's install a Display Manager & Desktop Environment.
 
-i'll be using **KDE** in this one cause `I Love KDE` :) .However you can use any display manager & desktop environment.
+I'll be using **KDE** in this one cause `I Love KDE` :) .However you can use any display manager & desktop environment.
 
 ```$ pacman -S sddm plasma```
 
@@ -296,6 +299,6 @@ if you want to install all `KDE` applications then run:
 ```$ systemctl enable sddm.service```
 ```$ systemctl start sddm.service```
 
-& you are done.Enjoy Your **Arch Linux** and feel free to contribute if you think i missed something.
+& you are done. Enjoy Your **Arch Linux** and feel free to contribute if you think something is missing.
 
 - Here is the [Official Arch Linux Install Guide](https://wiki.archlinux.org/title/installation_guide).
